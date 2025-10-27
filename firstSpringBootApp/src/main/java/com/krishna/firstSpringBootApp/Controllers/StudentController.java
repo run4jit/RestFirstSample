@@ -28,26 +28,21 @@ public class StudentController {
 
     @PostMapping("/")
     public Student addStudent(@RequestBody Student student) {
-        service.addStudent(student);
-        return student;
+        return service.addStudent(student);
     }
 
     @GetMapping("/{roll}")
-    public Student getStudentById(@PathVariable int roll) {
-        List<Student> students = service.getStudentById(roll);
-        if (students != null && students.isEmpty()) {
-            return students.get(0);
-        }
-        return null;
+    public Student getStudentById(@PathVariable Long roll) {
+        return service.getStudentById(roll);
     }
 
     @DeleteMapping("/")
-    public boolean deleteStudentById(int roll) {
+    public boolean deleteStudentById(Long roll) {
         return service.deleteStudentById(roll);
     }
 
     @PutMapping("/{id}")
-    public boolean updateStudent(@RequestBody Student student, @PathVariable int roll) {
+    public boolean updateStudent(@RequestBody Student student, @PathVariable Long roll) {
         return service.updateStudent(roll, student);
     }
 }
