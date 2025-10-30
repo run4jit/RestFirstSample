@@ -18,7 +18,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 @Entity
 public class Student {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long identityNumber;
     private String name;
     private String stream;
@@ -31,8 +31,8 @@ public class Student {
     }
 
     public void updateMe(Student that) {
-        this.name = that.name;
-        this.stream = that.stream;
-        this.marks = that.marks;
+        this.name = (that.name != null || !that.name.isBlank())  ? that.name : this.name;
+        this.stream = (that.stream != null || !that.stream.isBlank())  ? that.stream : this.stream;;
+        this.marks = !(that.marks < 1)  ? that.marks : this.marks;
     }
 }
